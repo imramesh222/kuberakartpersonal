@@ -28,6 +28,7 @@ export function CategoryPage() {
   const [maxPrice, setMaxPrice] = useState(150000);
   const [selectedRating, setSelectedRating] = useState<number | null>(null);
   const [expandedCategories, setExpandedCategories] = useState<Record<string, boolean>>({});
+  const [expandedSubcatList, setExpandedSubcatList] = useState<Record<string, boolean>>({});
 
   // Get all unique brands
   const allBrands = Array.from(new Set(PRODUCTS.map(p => p.brand))).sort();
@@ -95,6 +96,15 @@ export function CategoryPage() {
     window.location.href = `/category/${path}`;
   };
 
+  const toggleSubcatList = (catId: string) => {
+    setExpandedSubcatList(current => ({
+      ...current,
+      [catId]: !current[catId]
+    }));
+  };
+
+  const SUBCAT_LIMIT = 5;
+
   return (
     <Layout>
       <div className="px-4 md:px-8 py-6">
@@ -129,7 +139,7 @@ export function CategoryPage() {
                     {/* Subcategories */}
                     {cat.subcategories && expandedCategories[cat.id] && (
                       <div className="ml-4 space-y-1 mt-1">
-                        {cat.subcategories.map(subcat => (
+                        {cat.subcategories.slice(0, expandedSubcatList[cat.id] ? undefined : SUBCAT_LIMIT).map(subcat => (
                           <div key={subcat.id}>
                             <button
                               onClick={() => {
@@ -169,6 +179,16 @@ export function CategoryPage() {
                             )}
                           </div>
                         ))}
+                        
+                        {/* Show More/Less Button */}
+                        {cat.subcategories && cat.subcategories.length > SUBCAT_LIMIT && (
+                          <button
+                            onClick={() => toggleSubcatList(cat.id)}
+                            className="w-full text-left px-2 py-2 text-xs text-primary hover:bg-primary/5 rounded font-medium"
+                          >
+                            {expandedSubcatList[cat.id] ? '▲ Show Less' : '▼ Show More'}
+                          </button>
+                        )}
                       </div>
                     )}
                   </div>
