@@ -1,0 +1,596 @@
+🚀 COMPLETE UPDATED PROMPT FOR REPLIT
+Create a complete multi-vendor e-commerce marketplace using React, TypeScript, and Tailwind CSS, similar to Daraz/Amazon.
+
+===========================================
+PART 1: HOMEPAGE (Main Landing Page)
+===========================================
+
+Create HomePage.tsx with the following sections in order:
+
+1. HEADER (sticky at top):
+- Orange background (#FF6900)
+- Logo "Daroz" on left
+- Search bar (center, white background, rounded)
+- Links on right: "SAVE MORE ON APP", "BECOME A SELLER", "HELP & SUPPORT", language option
+- Cart icon with badge (item count)
+- Below header: Quick links row (white text on orange): "mobile phone", "shoes for men", "iphone", "laptop", "iphone 15 pro max"
+
+2. NAVIGATION BAR:
+- White background
+- "Categories" dropdown button (with chevron down icon)
+- Main navigation links
+
+3. OFFERS CAROUSEL:
+- Full-width banner carousel
+- Auto-rotating slides (3-5 slides)
+- Promotional banners with images
+- Left/right arrow navigation
+- Dot indicators at bottom
+- Make it auto-play every 4 seconds
+
+4. FLASH SALE SECTION:
+- Red background banner with "Flash Sale" title and countdown timer
+- "Ends in: HH:MM:SS" countdown
+- "X sold" indicator with progress bar
+- Horizontal scrollable product cards
+- Each card shows: image, price (large, red), original price (strikethrough), discount percentage badge
+- "SHOP MORE" button on right
+
+5. CATEGORIES SECTION:
+- Title: "Shop by Category" or just "Categories"
+- Horizontal scrollable row of circular category cards
+- Each category has:
+  * Circular image (200x200px, with subtle shadow)
+  * Category name below (center-aligned)
+  * Hover effect: slight scale up
+- Categories to include:
+  * Clothes (clothing rack image)
+  * Beauty (makeup items image)
+  * Laptops (laptop image)
+  * Shoes (shoes image)
+  * Smartwatch (watch image)
+  * Mobile Phones
+  * Electronics
+  * Home & Living
+  * Sports
+  * Automotive
+- Right arrow to scroll more categories
+- Make it scrollable on mobile (swipe)
+
+6. JUST FOR YOU SECTION:
+- Title: "Just For You"
+- Grid layout: 5 columns on desktop, 2 on mobile
+- Product cards with:
+  * Product image
+  * Product name (2 lines max, ellipsis)
+  * Price (large, orange #FF6900)
+  * Original price (smaller, gray, strikethrough) with discount percentage
+  * Rating stars + number of sold items
+  * Store badge if official/verified
+  * "0% EMI" or "Free Gift" badge if applicable
+- Initially show 20 products
+- "LOAD MORE" button at bottom (loads 20 more products)
+- Infinite scroll option (optional)
+
+7. FOOTER:
+- Dark background with multiple columns
+- Customer Service, About Us, Payment, Follow Us sections
+- Social media icons
+- Copyright info
+
+===========================================
+PART 2: CATEGORY PAGE (Product Listing)
+===========================================
+
+Create CategoryPage.tsx that opens when clicking any category:
+
+LAYOUT: Three-column layout
+
+LEFT SIDEBAR (300px width, sticky):
+
+1. CATEGORY Section:
+- Title: "Category" (bold)
+- Nested list with these items (checkboxes):
+  □ Mobile Phone Cases
+  □ Phone Screen Protectors
+  □ Phone Cables & Converters
+  □ Phone Docks & Stands
+  □ Fashion Mobile Accessories
+  □ Tablet Cases & Covers
+  □ Phone Wall Chargers
+  □ TV Remote Controllers
+  "VIEW MORE" link (expands to show more)
+
+2. BRAND Section:
+- Title: "Brand"
+- Search box for brands
+- Checkboxes list:
+  □ Hontinga
+  □ Jizetin
+  □ Ithmy
+  □ UCUC
+  □ Joyroom
+  □ LENUO
+  □ caseunicorn
+  □ Lereach
+  □ hoco
+  □ Masala Beads
+  (show first 10, then "VIEW MORE" link)
+
+3. SERVICE & PROMOTION Section:
+- Checkboxes:
+  □ Flash Sale
+  □ Best Price Guaranteed
+  □ Free Delivery
+
+4. SHIPPED FROM Section:
+- Checkboxes:
+  □ Overseas
+  □ China
+
+5. PRICE Section:
+- Min/Max input fields
+- Apply button
+- Quick filters: "Under Rs. 500", "Rs. 500-1000", etc.
+
+6. RATING Section:
+- Star rating filters:
+  ⭐⭐⭐⭐⭐ And Up
+  ⭐⭐⭐⭐ And Up
+  ⭐⭐⭐ And Up
+  ⭐⭐ And Up
+
+7. WARRANTY TYPE Section:
+- Checkboxes for different warranty options
+
+8. COLOR FAMILY Section:
+- Color chips/boxes (clickable)
+- Show first 8 colors, "VIEW LESS" to collapse
+
+9. Additional filters (collapsible):
+- Delivery Option
+- Type (case/cover)
+- Case Material
+- Compatibility by Model
+- Case Function
+- Brand Compatibility
+
+MAIN CONTENT AREA:
+
+TOP BAR:
+- Breadcrumb: "Home > Electronics > Mobile Phone"
+- Title: "mobile phone"
+- Results count: "31933 items found for 'mobile phone'"
+- Right side:
+  * "Sort By:" dropdown (Best Match, Price: Low to High, Price: High to Low, Top Sales, Newest)
+  * "View:" toggle (Grid/List icons)
+
+PRODUCT GRID:
+- 4 columns on desktop, 2 on tablet, 1 on mobile
+- Product cards showing:
+  * Product image (with badges: "Mall", "0% EMI", "Free Gift", brand logo overlay)
+  * Product name (2 lines, truncate)
+  * Price in red/orange (Rs. X,XXX)
+  * Sold count + star rating + "(reviews count)" in small text
+  * Store/seller name below
+- Hover effect: shadow increases, slight scale
+- Display 40 products per page
+
+PAGINATION:
+- Bottom of page
+- Numbers: 1, 2, 3, ... Last
+- Previous/Next buttons
+
+===========================================
+PART 3: PRODUCT DETAIL PAGE
+===========================================
+
+Create ProductDetailPage.tsx with comprehensive details:
+
+LAYOUT: Multi-section layout
+
+TOP SECTION (Two columns):
+
+LEFT COLUMN (40%):
+- Large product image (500x500px)
+- Image gallery thumbnails below (3-5 thumbnails, clickable)
+- Zoom on hover functionality
+- Brand logo in top-left corner
+
+RIGHT COLUMN (60%):
+
+1. PRODUCT INFO Section:
+- Store badge: "Mall" with "Verified Store" indicator
+- Product title: "Apple iPhone 13 128GB - EvoStore"
+- Star rating with link: "Ratings 66 | 215 Answered Questions"
+- Brand info: "Brand: Apple | More Mobiles from Apple" (clickable links)
+
+2. PRICING Section:
+- Large current price: "Rs. 80,399" (orange/red, very prominent)
+- Original price: "Rs. 80,400 -0%" (strikethrough, gray)
+- Flash sale banner if applicable (red background, countdown)
+
+3. VARIANTS Section:
+- "Color Family: starlight"
+  * Color option boxes (clickable, selected has border)
+  * Show 2-3 color options with small product images
+
+- "RAM Memory: 4GB"
+  * Option boxes (4GB selected with orange border)
+
+- "Storage Capacity: 128GB"
+  * Option boxes (128GB selected with orange border)
+
+4. QUANTITY & PURCHASE Section:
+- "Quantity" with - [1] + controls
+- Two large buttons:
+  * "Buy Now" (light blue, full width)
+  * "Add to Cart" (orange, full width)
+
+5. DELIVERY OPTIONS Section (boxed):
+- Icon + "Delivery Options" heading
+- Location: "Bagmati Province, Lalitpur" with "CHANGE" link
+- "Standard Delivery - Guaranteed by 4 Jan - Rs. 83"
+- "Cash on Delivery Available"
+
+6. RETURN & WARRANTY Section (boxed):
+- "14 Days Free Returns"
+- "1 Year Brand Warranty"
+
+7. APP DOWNLOAD Section:
+- QR code
+- "Download app to enjoy exclusive discounts!"
+- "Scan with mobile"
+
+8. SELLER INFO Section (boxed):
+- "Sold by: EvoStore"
+- Store badges: "Mall", "Certified Store"
+- "Chat" button (blue)
+- Three metrics:
+  * "Positive Seller Ratings: 93%"
+  * "Ship on Time: 100%"
+  * "Chat Response Rate: Not available"
+
+TABS SECTION (Below main content, full width):
+
+Create tabbed interface with these tabs:
+1. "Details" (default active)
+2. "Ratings & Reviews (1234)"
+3. "Specifications"
+4. "Questions about this product (215)"
+
+TAB 1 - DETAILS:
+- Product description (rich text)
+- Key features (bullet points)
+- What's in the box
+- Images/videos if available
+
+TAB 2 - RATINGS & REVIEWS:
+- Overall rating summary (large number + stars)
+- Rating breakdown (5★: XX%, 4★: XX%, etc.) with bars
+- Filter options: "All Stars", "5 Stars", "4 Stars", etc.
+- Sort by: "Most Recent", "Most Helpful", "Highest Rating"
+- Review cards showing:
+  * User name + verified badge
+  * Star rating
+  * Review date
+  * Review text
+  * Helpful vote buttons (thumbs up with count)
+  * Seller response if any
+- "Load More Reviews" button
+- "Write a Review" button (prominent, orange)
+
+TAB 3 - SPECIFICATIONS:
+- Table format with two columns:
+  * Specification name (left)
+  * Specification value (right)
+- Categories: General, Display, Camera, Performance, Battery, etc.
+- Clean, readable table with alternating row colors
+
+TAB 4 - QUESTIONS:
+- "Ask a Question" button at top
+- List of Q&A:
+  * Question text (bold)
+  * Answer count
+  * Answers below with user names
+  * "Helpful" vote buttons
+  * "Answer this question" link
+- "Load More Questions" button
+
+BELOW TABS SECTIONS:
+
+1. "MORE PRODUCTS FROM THIS STORE" Section:
+- Horizontal scrollable row
+- Product cards (same as grid cards)
+- Show 5-6 products from same seller
+- "View All" link to seller's store page
+
+2. "SIMILAR PRODUCTS" Section:
+- Grid layout (5 columns)
+- Product cards from all stores
+- Same product or similar category items
+- Show 10-20 products
+- "Load More" button
+
+===========================================
+ADDITIONAL COMPONENTS & FEATURES
+===========================================
+
+1. SEARCH FUNCTIONALITY:
+- Search bar shows suggestions dropdown
+- Recent searches
+- Popular searches
+- Product suggestions with images
+
+2. CART SIDEBAR (slides from right):
+- Product list with images
+- Quantity controls
+- Remove option
+- Subtotal
+- "View Cart" and "Checkout" buttons
+
+3. USER MENU (dropdown):
+- My Account
+- My Orders
+- My Wishlist
+- My Reviews
+- Account Settings
+- Logout
+
+4. CATEGORY MEGA MENU (dropdown from Categories):
+- Multi-column layout
+- Categories with subcategories
+- Icons for each category
+- "View All" links
+
+5. MOBILE RESPONSIVE:
+- Hamburger menu for navigation
+- Bottom navigation bar (Home, Categories, Cart, Account)
+- Collapsible filters (drawer/modal)
+- Touch-friendly buttons and spacing
+- Optimized image sizes
+
+===========================================
+STYLING & DESIGN REQUIREMENTS
+===========================================
+
+COLOR SCHEME:
+- Primary: Orange (#FF6900)
+- Secondary: Light Blue (#1EA4CE)
+- Text: Dark Gray (#212121)
+- Background: Light Gray (#F5F5F5)
+- White cards with shadows
+- Red for flash sales/discounts
+
+TYPOGRAPHY:
+- Font: Use system fonts (sans-serif)
+- Product titles: 14-16px
+- Prices: 18-24px, bold
+- Body text: 14px
+- Headings: 20-28px, bold
+
+SPACING:
+- Card padding: 12-16px
+- Section margins: 24-32px
+- Grid gaps: 16px
+- Consistent spacing throughout
+
+INTERACTIONS:
+- Smooth hover effects (200ms transition)
+- Button hover: darken by 10%
+- Card hover: shadow increase + slight scale (1.02)
+- Smooth scrolling for carousels
+- Loading skeletons for content
+- Toast notifications for actions
+
+ICONS:
+- Use Lucide React or Heroicons
+- Consistent icon style throughout
+- Proper sizing (16px, 20px, 24px)
+
+===========================================
+DATA & STATE MANAGEMENT
+===========================================
+
+MOCK DATA:
+Create realistic mock data for:
+- 50+ products with varied:
+  * Prices (Rs. 500 - Rs. 150,000)
+  * Categories (Electronics, Fashion, Home, etc.)
+  * Brands (Apple, Samsung, Xiaomi, etc.)
+  * Ratings (4.0 - 5.0)
+  * Sold counts (50 - 5000)
+  * Multiple images per product
+  * Specifications
+  * Reviews (20-30 per product)
+
+- 10+ categories with subcategories
+- 5+ sellers/stores
+- Flash sale items (5-10 products)
+
+STATE MANAGEMENT:
+- Cart state (items, quantities)
+- Wishlist state
+- User authentication state
+- Selected filters
+- Sort preferences
+- Search history
+- Recently viewed products
+
+LOCAL STORAGE:
+- Persist cart items
+- Save wishlist
+- Store search history
+- Remember selected location
+
+===========================================
+ROUTING & NAVIGATION
+===========================================
+
+Create routes for:
+- "/" - Homepage
+- "/category/:categoryName" - Category page
+- "/product/:productId" - Product detail page
+- "/cart" - Shopping cart
+- "/checkout" - Checkout process
+- "/search?q=query" - Search results
+
+Navigation should be smooth with proper URL updates and browser history support.
+
+===========================================
+TECHNICAL REQUIREMENTS
+===========================================
+
+PERFORMANCE:
+- Lazy load images (use intersection observer)
+- Virtual scrolling for long lists
+- Code splitting by route
+- Optimize bundle size
+- Fast initial page load
+
+ACCESSIBILITY:
+- Semantic HTML
+- ARIA labels
+- Keyboard navigation
+- Focus management
+- Alt text for images
+- Proper heading hierarchy
+
+SEO:
+- Meta tags for each page
+- Proper title tags
+- Structured data (JSON-LD)
+- Sitemap ready structure
+
+ERROR HANDLING:
+- 404 page for invalid routes
+- Error boundaries
+- Graceful API failure handling
+- Empty state designs
+- Loading states everywhere
+
+===========================================
+ADDITIONAL FEATURES
+===========================================
+
+1. WISHLIST:
+- Heart icon on product cards
+- Toggle add/remove
+- Wishlist page showing all saved items
+
+2. COMPARE PRODUCTS:
+- Select 2-4 products to compare
+- Side-by-side comparison table
+- Specifications comparison
+
+3. FILTERS MEMORY:
+- Remember applied filters when navigating back
+- Clear all filters option
+- Active filters display at top
+
+4. PRICE ALERTS:
+- "Notify me when price drops" option
+- Email/SMS notification settings
+
+5. RECENTLY VIEWED:
+- Track last 10-20 viewed products
+- Show in sidebar or bottom of pages
+
+6. RATINGS BREAKDOWN:
+- Visual bar charts for rating distribution
+- Filter by rating
+- Sort by most helpful
+
+===========================================
+IMPLEMENTATION NOTES
+===========================================
+
+1. Start with HomePage first
+2. Then create CategoryPage
+3. Finally ProductDetailPage with all tabs
+4. Add routing and navigation
+5. Implement filters and sorting
+6. Add cart functionality
+7. Polish with animations and interactions
+
+PRIORITY FEATURES:
+✅ Homepage with all sections
+✅ Category page with working filters
+✅ Product detail page with tabs
+✅ Responsive design
+✅ Working cart
+✅ Search functionality
+✅ Smooth navigation
+
+MAKE IT:
+- Production-ready quality
+- Pixel-perfect design
+- Smooth and fast
+- Mobile-optimized
+- Accessible
+- Professional looking
+
+Create a complete, fully functional e-commerce marketplace that looks and works like Daraz, Amazon, or Flipkart!
+
+🎯 HOW TO USE:
+
+Copy the entire prompt above
+Go to Replit.com
+Create new Repl → Select "React TypeScript (Vite)"
+Name it: "Daraz-Clone-Ecommerce"
+Open AI Agent (Cmd/Ctrl + I)
+Paste the prompt
+Press Enter and wait
+
+
+📝 FOLLOW-UP PROMPTS (After Initial Generation):
+If you need adjustments:
+"Make the flash sale countdown actually work and update every second"
+"Add smooth fade-in animations when products load"
+"Make the category carousel auto-scroll slowly"
+"Add a 'Back to Top' button that appears when scrolling down"
+"Create a mobile bottom navigation bar with Home, Categories, Cart, and Profile icons"
+"Add a 'Quick View' modal that shows product details without leaving the category page"
+
+🔍 EXPECTED FILE STRUCTURE:
+src/
+├── components/
+│   ├── Header.tsx
+│   ├── CategoryCarousel.tsx
+│   ├── ProductCard.tsx
+│   ├── FlashSale.tsx
+│   ├── FilterSidebar.tsx
+│   ├── ProductGrid.tsx
+│   ├── TabsSection.tsx
+│   ├── ReviewCard.tsx
+│   └── Footer.tsx
+├── pages/
+│   ├── HomePage.tsx
+│   ├── CategoryPage.tsx
+│   └── ProductDetailPage.tsx
+├── hooks/
+│   ├── useCart.ts
+│   └── useFilters.ts
+├── data/
+│   ├── products.ts
+│   ├── categories.ts
+│   └── reviews.ts
+├── types/
+│   └── index.ts
+└── App.tsx
+
+✨ KEY FEATURES YOU'LL GET:
+✅ Full homepage with offers carousel
+✅ Flash sale section with countdown
+✅ Category circles (swipeable)
+✅ Just For You grid with Load More
+✅ Category page with left sidebar filters
+✅ Product detail page with tabs
+✅ Reviews and ratings system
+✅ Q&A section
+✅ Similar products sections
+✅ Store information
+✅ Responsive mobile design
+✅ Working cart functionality
+✅ Search with suggestions
+✅ Wishlist feature
