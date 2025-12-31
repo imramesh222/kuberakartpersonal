@@ -18,6 +18,7 @@ export interface Product {
   reviewsCount: number;
   image: string;
   category: string;
+  subcategory: string;
   brand: string;
   isMall?: boolean;
   isFlashSale?: boolean;
@@ -25,10 +26,16 @@ export interface Product {
   description?: string;
 }
 
+export interface SubCategory {
+  id: string;
+  name: string;
+}
+
 export interface Category {
   id: string;
   name: string;
   image: string;
+  subcategories: SubCategory[];
 }
 
 export const CAROUSEL_SLIDES = [
@@ -38,35 +45,99 @@ export const CAROUSEL_SLIDES = [
 ];
 
 export const CATEGORIES: Category[] = [
-  { id: 'clothes', name: 'Clothes', image: clothesImg },
-  { id: 'beauty', name: 'Beauty', image: beautyImg },
-  { id: 'laptops', name: 'Laptops', image: laptopImg },
-  { id: 'shoes', name: 'Shoes', image: shoesImg },
-  { id: 'smartwatch', name: 'Smartwatch', image: watchImg },
-  { id: 'phones', name: 'Mobile Phones', image: phoneImg },
-  { id: 'electronics', name: 'Electronics', image: laptopImg }, // reused
-  { id: 'home', name: 'Home & Living', image: clothesImg }, // reused
-  { id: 'sports', name: 'Sports', image: shoesImg }, // reused
-  { id: 'automotive', name: 'Automotive', image: watchImg }, // reused
+  {
+    id: 'electronics',
+    name: 'Electronics',
+    image: laptopImg,
+    subcategories: [
+      { id: 'mobiles', name: 'Mobile Phones' },
+      { id: 'laptops', name: 'Laptops' },
+      { id: 'tablets', name: 'Tablets' },
+      { id: 'covers', name: 'Mobile Covers' },
+      { id: 'chargers', name: 'Chargers' },
+      { id: 'printers', name: 'Printers' },
+    ]
+  },
+  {
+    id: 'clothes',
+    name: 'Clothes',
+    image: clothesImg,
+    subcategories: [
+      { id: 'mens', name: 'Men\'s Clothing' },
+      { id: 'womens', name: 'Women\'s Clothing' },
+      { id: 'kids', name: 'Kids Clothing' },
+      { id: 'accessories', name: 'Accessories' },
+    ]
+  },
+  {
+    id: 'gadgets',
+    name: 'Gadgets',
+    image: watchImg,
+    subcategories: [
+      { id: 'smartwatch', name: 'Smartwatches' },
+      { id: 'headphones', name: 'Headphones' },
+      { id: 'speakers', name: 'Speakers' },
+      { id: 'cameras', name: 'Cameras' },
+    ]
+  },
+  {
+    id: 'kitchen',
+    name: 'Kitchen',
+    image: beautyImg,
+    subcategories: [
+      { id: 'cookware', name: 'Cookware' },
+      { id: 'appliances', name: 'Appliances' },
+      { id: 'utensils', name: 'Utensils' },
+      { id: 'storage', name: 'Storage' },
+    ]
+  },
+  {
+    id: 'shoes',
+    name: 'Shoes',
+    image: shoesImg,
+    subcategories: [
+      { id: 'mens-shoes', name: 'Men\'s Shoes' },
+      { id: 'womens-shoes', name: 'Women\'s Shoes' },
+      { id: 'sports-shoes', name: 'Sports Shoes' },
+      { id: 'casual-shoes', name: 'Casual Shoes' },
+    ]
+  },
+  {
+    id: 'beauty',
+    name: 'Beauty & Personal Care',
+    image: beautyImg,
+    subcategories: [
+      { id: 'skincare', name: 'Skincare' },
+      { id: 'makeup', name: 'Makeup' },
+      { id: 'haircare', name: 'Hair Care' },
+      { id: 'perfume', name: 'Perfumes' },
+    ]
+  },
 ];
 
-const BRANDS = ['Apple', 'Samsung', 'Xiaomi', 'Nike', 'Adidas', 'L\'Oreal', 'Sony', 'Dell'];
+const BRANDS = ['Apple', 'Samsung', 'Xiaomi', 'Nike', 'Adidas', 'L\'Oreal', 'Sony', 'Dell', 'Bosch', 'Philips'];
 
-export const PRODUCTS: Product[] = Array.from({ length: 50 }).map((_, i) => {
-  const category = CATEGORIES[i % CATEGORIES.length];
+const flattenedCategories = CATEGORIES.flatMap(cat =>
+  cat.subcategories.map(subcat => ({ category: cat.id, subcategory: subcat.id }))
+);
+
+export const PRODUCTS: Product[] = Array.from({ length: 100 }).map((_, i) => {
+  const catSubcat = flattenedCategories[i % flattenedCategories.length];
+  const catData = CATEGORIES.find(c => c.id === catSubcat.category);
   const price = Math.floor(Math.random() * 100000) + 500;
   const originalPrice = Math.floor(price * (1 + Math.random() * 0.5));
   
   return {
     id: `prod-${i + 1}`,
-    name: `${category.name} Item ${i + 1} - High Quality Premium Product`,
+    name: `Premium Product ${i + 1} - High Quality Item`,
     price,
     originalPrice,
-    rating: 4 + Math.random(),
+    rating: 3.5 + Math.random() * 1.5,
     soldCount: Math.floor(Math.random() * 5000),
     reviewsCount: Math.floor(Math.random() * 500),
-    image: category.image,
-    category: category.id,
+    image: catData?.image || laptopImg,
+    category: catSubcat.category,
+    subcategory: catSubcat.subcategory,
     brand: BRANDS[i % BRANDS.length],
     isMall: Math.random() > 0.7,
     isFlashSale: Math.random() > 0.8,
