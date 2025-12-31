@@ -15,11 +15,11 @@ export function Footer() {
             </ul>
           </div>
           <div>
-            <h3 className="font-bold text-lg mb-4">Daroz</h3>
+            <h3 className="font-bold text-lg mb-4">KuberaKart</h3>
             <ul className="space-y-2 text-sm text-gray-300">
-              <li><a href="#" className="hover:underline">About Daroz</a></li>
+              <li><a href="#" className="hover:underline">About KuberaKart</a></li>
               <li><a href="#" className="hover:underline">Careers</a></li>
-              <li><a href="#" className="hover:underline">Daroz Blog</a></li>
+              <li><a href="#" className="hover:underline">KuberaKart Blog</a></li>
               <li><a href="#" className="hover:underline">Terms & Conditions</a></li>
               <li><a href="#" className="hover:underline">Privacy Policy</a></li>
             </ul>
@@ -44,7 +44,7 @@ export function Footer() {
         </div>
         
         <div className="border-t border-white/10 pt-6 text-center text-sm text-gray-400">
-          <p>&copy; {new Date().getFullYear()} Daroz. All Rights Reserved.</p>
+          <p>&copy; {new Date().getFullYear()} KuberaKart. All Rights Reserved.</p>
         </div>
       </div>
     </footer>

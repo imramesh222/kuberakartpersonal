@@ -27,13 +27,13 @@ export function Header() {
         <div className="container mx-auto flex items-center justify-between gap-4 md:gap-8">
           {/* Logo */}
           <Link href="/" className="text-2xl font-bold tracking-tight hover:opacity-90">
-            Daroz
+            KuberaKart
           </Link>
 
           {/* Search Bar */}
           <form onSubmit={handleSearch} className="flex-1 max-w-2xl hidden md:flex relative">
             <Input 
-              placeholder="Search in Daroz" 
+              placeholder="Search in KuberaKart" 
               className="bg-white text-black border-none rounded-r-none h-10 focus-visible:ring-0"
             />
             <Button type="submit" variant="secondary" className="rounded-l-none bg-primary-foreground/10 hover:bg-primary-foreground/20 text-primary h-10 px-6 font-semibold">
@@ -67,7 +67,7 @@ export function Header() {
         <div className="mt-3 md:hidden">
           <form onSubmit={handleSearch} className="flex relative">
             <Input 
-              placeholder="Search in Daroz" 
+              placeholder="Search in KuberaKart" 
               className="bg-white text-black border-none h-9 text-sm"
             />
             <Button type="submit" size="sm" className="absolute right-0 top-0 h-9 bg-transparent hover:bg-transparent text-gray-500">
@@ -97,7 +97,7 @@ export function Header() {
           <div className="flex items-center gap-6">
             <Link href="/" className="hover:text-primary transition-colors">Home</Link>
             <Link href="/flash-sale" className="hover:text-primary transition-colors">Flash Sale</Link>
-            <Link href="/mall" className="hover:text-primary transition-colors flex items-center gap-1">Daroz Mall</Link>
+            <Link href="/mall" className="hover:text-primary transition-colors flex items-center gap-1">KuberaKart Mall</Link>
             <Link href="/help" className="hover:text-primary transition-colors">Help & Support</Link>
           </div>
         </div>
