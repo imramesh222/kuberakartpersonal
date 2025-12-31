@@ -265,12 +265,22 @@ export function ProductPage() {
           </Tabs>
         </div>
 
+        {/* Products from Same Store */}
+        <div>
+          <h2 className="text-xl font-bold text-gray-800 mb-4">More Products from {product.brand}</h2>
+          <div className="grid grid-cols-2 md:grid-cols-6 gap-4">
+            {PRODUCTS.filter(p => p.brand === product.brand && p.id !== product.id).slice(0, 6).map((prod) => (
+              <ProductCard key={prod.id} product={prod} />
+            ))}
+          </div>
+        </div>
+
         {/* Similar Products */}
         <div>
           <h2 className="text-xl font-bold text-gray-800 mb-4">You May Also Like</h2>
           <div className="grid grid-cols-2 md:grid-cols-6 gap-4">
-            {PRODUCTS.slice(10, 16).map((product) => (
-              <ProductCard key={product.id} product={product} />
+            {PRODUCTS.filter(p => p.category === product.category && p.id !== product.id).slice(0, 6).map((prod) => (
+              <ProductCard key={prod.id} product={prod} />
             ))}
           </div>
         </div>
