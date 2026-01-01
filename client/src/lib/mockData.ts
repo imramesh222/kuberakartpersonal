@@ -96,6 +96,34 @@ export const CATEGORIES: Category[] = [
         id: 'printers',
         name: 'Printers'
       },
+      {
+        id: 'monitors',
+        name: 'Monitors',
+        children: [
+          { id: 'gaming-monitors', name: 'Gaming Monitors' },
+          { id: '4k-monitors', name: '4K Monitors' },
+          { id: 'curved-monitors', name: 'Curved Monitors' },
+        ]
+      },
+      {
+        id: 'components',
+        name: 'PC Components',
+        children: [
+          { id: 'processors', name: 'Processors' },
+          { id: 'graphic-cards', name: 'Graphic Cards' },
+          { id: 'ram', name: 'RAM' },
+          { id: 'storage-ssd', name: 'SSD & HDD' },
+        ]
+      },
+      {
+        id: 'networking',
+        name: 'Networking',
+        children: [
+          { id: 'routers', name: 'Routers' },
+          { id: 'modems', name: 'Modems' },
+          { id: 'switches', name: 'Network Switches' },
+        ]
+      },
     ]
   },
 
