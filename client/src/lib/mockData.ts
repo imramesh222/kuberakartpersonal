@@ -388,6 +388,106 @@ export const CATEGORIES: Category[] = [
       },
     ]
   },
+  {
+    id: 'furniture',
+    name: 'Furniture',
+    image: clothesImg,
+    subcategories: [
+      { id: 'living-room', name: 'Living Room' },
+      { id: 'bedroom', name: 'Bedroom' },
+      { id: 'office', name: 'Office Furniture' },
+    ]
+  },
+  {
+    id: 'grocery',
+    name: 'Grocery',
+    image: beautyImg,
+    subcategories: [
+      { id: 'beverages', name: 'Beverages' },
+      { id: 'snacks', name: 'Snacks' },
+      { id: 'cooking', name: 'Cooking Essentials' },
+    ]
+  },
+  {
+    id: 'pets',
+    name: 'Pet Supplies',
+    image: shoesImg,
+    subcategories: [
+      { id: 'dog-food', name: 'Dog Food' },
+      { id: 'cat-food', name: 'Cat Food' },
+      { id: 'pet-grooming', name: 'Pet Grooming' },
+    ]
+  },
+  {
+    id: 'health',
+    name: 'Health & Wellness',
+    image: beautyImg,
+    subcategories: [
+      { id: 'supplements', name: 'Supplements' },
+      { id: 'medical', name: 'Medical Supplies' },
+      { id: 'fitness-nutrition', name: 'Fitness Nutrition' },
+    ]
+  },
+  {
+    id: 'tools',
+    name: 'Tools & DIY',
+    image: laptopImg,
+    subcategories: [
+      { id: 'hand-tools', name: 'Hand Tools' },
+      { id: 'power-tools', name: 'Power Tools' },
+      { id: 'hardware', name: 'Hardware' },
+    ]
+  },
+  {
+    id: 'stationery',
+    name: 'Stationery & Art',
+    image: watchImg,
+    subcategories: [
+      { id: 'office-supplies', name: 'Office Supplies' },
+      { id: 'art-materials', name: 'Art Materials' },
+      { id: 'notebooks', name: 'Notebooks' },
+    ]
+  },
+  {
+    id: 'baby',
+    name: 'Baby & Toddler',
+    image: clothesImg,
+    subcategories: [
+      { id: 'diapers', name: 'Diapers' },
+      { id: 'baby-gear', name: 'Baby Gear' },
+      { id: 'baby-toys', name: 'Baby Toys' },
+    ]
+  },
+  {
+    id: 'garden',
+    name: 'Garden & Outdoor',
+    image: shoesImg,
+    subcategories: [
+      { id: 'plants', name: 'Plants' },
+      { id: 'gardening-tools', name: 'Gardening Tools' },
+      { id: 'outdoor-decor', name: 'Outdoor Decor' },
+    ]
+  },
+  {
+    id: 'jewelry',
+    name: 'Jewelry & Watches',
+    image: watchImg,
+    subcategories: [
+      { id: 'fine-jewelry', name: 'Fine Jewelry' },
+      { id: 'fashion-jewelry', name: 'Fashion Jewelry' },
+      { id: 'watches', name: 'Watches' },
+    ]
+  },
+  {
+    id: 'musical',
+    name: 'Musical Instruments',
+    image: laptopImg,
+    subcategories: [
+      { id: 'guitars', name: 'Guitars' },
+      { id: 'keyboards', name: 'Keyboards' },
+      { id: 'drums', name: 'Drums' },
+    ]
+  },
 ];
 
 const BRANDS = ['Apple', 'Samsung', 'Xiaomi', 'Nike', 'Adidas', 'L\'Oreal', 'Sony', 'Dell', 'Bosch', 'Philips', 'LG', 'Canon', 'Nikon', 'Puma', 'Reebok', 'Dove', 'Loreal', 'Maybelline'];

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Layout } from "@/components/layout/Layout";
 import { HeroCarousel } from "@/components/home/hero-carousel";
 import { ProductCard } from "@/components/ui/product-card";
@@ -7,6 +8,15 @@ import { ChevronRight, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export function HomePage() {
+  const [isAtStart, setIsAtStart] = useState(true);
+  const [isAtEnd, setIsAtEnd] = useState(false);
+
+  const checkScroll = (e: React.UIEvent<HTMLDivElement>) => {
+    const target = e.currentTarget;
+    setIsAtStart(target.scrollLeft <= 5);
+    setIsAtEnd(target.scrollLeft + target.clientWidth >= target.scrollWidth - 5);
+  };
+
   return (
     <Layout>
       <div className="space-y-8 pb-12">
@@ -30,12 +40,13 @@ export function HomePage() {
                 id="category-scroll-container"
                 className="flex gap-4 overflow-x-auto scroll-smooth no-scrollbar pb-2"
                 style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+                onScroll={checkScroll}
               >
                 {CATEGORIES.map((cat) => (
                   <Link key={cat.id} href={`/category/${cat.id}`}>
                     <div className="flex flex-col items-center gap-2 group cursor-pointer shrink-0 w-24">
                       <div className="w-20 h-20 rounded-full overflow-hidden border border-gray-100 shadow-sm group-hover:shadow-md transition-all group-hover:scale-105">
-                        <img src={cat.image} alt={cat.name} className="w-full h-full object-cover" />
+                        <img src={cat.image} alt={cat.name} className="w-full h-full object-cover rounded-[2px]" />
                       </div>
                       <span className="text-xs text-center font-medium text-gray-700 group-hover:text-primary truncate w-full">
                         {cat.name}
@@ -46,24 +57,28 @@ export function HomePage() {
               </div>
 
               {/* Navigation Arrows */}
-              <button 
-                onClick={() => {
-                  const container = document.getElementById('category-scroll-container');
-                  if (container) container.scrollLeft -= 200;
-                }}
-                className="absolute left-0 top-1/2 -translate-y-1/2 bg-white/90 shadow-md rounded-full p-1.5 border border-gray-100 hidden group-hover:block z-10"
-              >
-                <ChevronRight className="w-5 h-5 rotate-180" />
-              </button>
-              <button 
-                onClick={() => {
-                  const container = document.getElementById('category-scroll-container');
-                  if (container) container.scrollLeft += 200;
-                }}
-                className="absolute right-0 top-1/2 -translate-y-1/2 bg-white/90 shadow-md rounded-full p-1.5 border border-gray-100 hidden group-hover:block z-10"
-              >
-                <ChevronRight className="w-5 h-5" />
-              </button>
+              {!isAtStart && (
+                <button 
+                  onClick={() => {
+                    const container = document.getElementById('category-scroll-container');
+                    if (container) container.scrollLeft -= 200;
+                  }}
+                  className="absolute left-0 top-1/2 -translate-y-1/2 bg-white/90 shadow-md rounded-full p-1.5 border border-gray-100 z-10"
+                >
+                  <ChevronRight className="w-5 h-5 rotate-180" />
+                </button>
+              )}
+              {!isAtEnd && (
+                <button 
+                  onClick={() => {
+                    const container = document.getElementById('category-scroll-container');
+                    if (container) container.scrollLeft += 200;
+                  }}
+                  className="absolute right-0 top-1/2 -translate-y-1/2 bg-white/90 shadow-md rounded-full p-1.5 border border-gray-100 z-10"
+                >
+                  <ChevronRight className="w-5 h-5" />
+                </button>
+              )}
             </div>
           </div>
         </section>
