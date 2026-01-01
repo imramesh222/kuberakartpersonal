@@ -24,20 +24,46 @@ export function HomePage() {
             </Link>
           </div>
           
-          <div className="bg-white p-4 rounded-lg shadow-sm">
-            <div className="grid grid-cols-5 md:grid-cols-10 gap-4">
-              {CATEGORIES.map((cat) => (
-                <Link key={cat.id} href={`/category/${cat.id}`}>
-                  <div className="flex flex-col items-center gap-2 group cursor-pointer">
-                    <div className="w-20 h-20 rounded-full overflow-hidden border border-gray-100 shadow-sm group-hover:shadow-md transition-all group-hover:scale-105">
-                      <img src={cat.image} alt={cat.name} className="w-full h-full object-cover" />
+          <div className="bg-white p-4 rounded-lg shadow-sm relative group">
+            <div className="flex overflow-hidden relative">
+              <div 
+                id="category-scroll-container"
+                className="flex gap-4 overflow-x-auto scroll-smooth no-scrollbar pb-2"
+                style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+              >
+                {CATEGORIES.map((cat) => (
+                  <Link key={cat.id} href={`/category/${cat.id}`}>
+                    <div className="flex flex-col items-center gap-2 group cursor-pointer shrink-0 w-24">
+                      <div className="w-20 h-20 rounded-full overflow-hidden border border-gray-100 shadow-sm group-hover:shadow-md transition-all group-hover:scale-105">
+                        <img src={cat.image} alt={cat.name} className="w-full h-full object-cover" />
+                      </div>
+                      <span className="text-xs text-center font-medium text-gray-700 group-hover:text-primary truncate w-full">
+                        {cat.name}
+                      </span>
                     </div>
-                    <span className="text-xs text-center font-medium text-gray-700 group-hover:text-primary">
-                      {cat.name}
-                    </span>
-                  </div>
-                </Link>
-              ))}
+                  </Link>
+                ))}
+              </div>
+
+              {/* Navigation Arrows */}
+              <button 
+                onClick={() => {
+                  const container = document.getElementById('category-scroll-container');
+                  if (container) container.scrollLeft -= 200;
+                }}
+                className="absolute left-0 top-1/2 -translate-y-1/2 bg-white/90 shadow-md rounded-full p-1.5 border border-gray-100 hidden group-hover:block z-10"
+              >
+                <ChevronRight className="w-5 h-5 rotate-180" />
+              </button>
+              <button 
+                onClick={() => {
+                  const container = document.getElementById('category-scroll-container');
+                  if (container) container.scrollLeft += 200;
+                }}
+                className="absolute right-0 top-1/2 -translate-y-1/2 bg-white/90 shadow-md rounded-full p-1.5 border border-gray-100 hidden group-hover:block z-10"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
             </div>
           </div>
         </section>

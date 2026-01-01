@@ -27,8 +27,16 @@ export function CategoryPage() {
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(150000);
   const [selectedRating, setSelectedRating] = useState<number | null>(null);
-  const [expandedCategories, setExpandedCategories] = useState<Record<string, boolean>>({});
+  const [expandedCategories, setExpandedCategories] = useState<Record<string, boolean>>(() => {
+    // Proactively expand the current category if it's in the route
+    const initial: Record<string, boolean> = {};
+    if (category && category !== 'all') {
+      initial[category] = true;
+    }
+    return initial;
+  });
   const [expandedSubcatList, setExpandedSubcatList] = useState<Record<string, boolean>>({});
+  const [sortBy, setSortBy] = useState('Best Match');
 
   // Get all unique brands
   const allBrands = Array.from(new Set(PRODUCTS.map(p => p.brand))).sort();
@@ -48,7 +56,7 @@ export function CategoryPage() {
 
   // Filter products based on all criteria
   const displayProducts = useMemo(() => {
-    let filtered = PRODUCTS;
+    let filtered = [...PRODUCTS];
 
     // Filter by category hierarchy
     if (category && category !== 'all') {
@@ -74,8 +82,28 @@ export function CategoryPage() {
       filtered = filtered.filter(p => Math.floor(p.rating) >= selectedRating);
     }
 
+    // Sorting logic
+    switch (sortBy) {
+      case 'Price Low to High':
+        filtered.sort((a, b) => a.price - b.price);
+        break;
+      case 'Price High to Low':
+        filtered.sort((a, b) => b.price - a.price);
+        break;
+      case 'Highest Rated':
+        filtered.sort((a, b) => b.rating - a.rating);
+        break;
+      case 'Newest':
+        // For mock purposes, just reverse ID
+        filtered.sort((a, b) => b.id.localeCompare(a.id));
+        break;
+      default:
+        // Best Match - no change
+        break;
+    }
+
     return filtered;
-  }, [category, subcategory, subsubcategory, selectedBrands, minPrice, maxPrice, selectedRating]);
+  }, [category, subcategory, subsubcategory, selectedBrands, minPrice, maxPrice, selectedRating, sortBy]);
 
   const toggleBrand = (brand: string) => {
     setSelectedBrands(current =>
@@ -277,7 +305,11 @@ export function CategoryPage() {
               <div className="flex items-center gap-4">
                 <div className="flex items-center gap-2 text-sm text-gray-600">
                   <span>Sort By:</span>
-                  <select className="border border-gray-200 rounded px-2 py-1 text-sm focus:outline-none focus:border-primary">
+                  <select 
+                    value={sortBy}
+                    onChange={(e) => setSortBy(e.target.value)}
+                    className="border border-gray-200 rounded px-2 py-1 text-sm focus:outline-none focus:border-primary"
+                  >
                     <option>Best Match</option>
                     <option>Price Low to High</option>
                     <option>Price High to Low</option>
