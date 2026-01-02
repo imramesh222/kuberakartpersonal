@@ -117,18 +117,10 @@ export function Header() {
         </div>
       </nav>
 
-      {/* Auth Modal */}
       <Dialog open={showAuthModal} onOpenChange={setShowAuthModal}>
         <DialogContent className="max-w-[420px] p-0 overflow-hidden border-none shadow-2xl rounded-2xl bg-white sm:rounded-2xl data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-bottom-[48%] data-[state=open]:slide-in-from-bottom-[48%] sm:data-[state=open]:slide-in-from-bottom-[50%] duration-300">
           <DialogTitle className="sr-only">Authentication</DialogTitle>
-          <div className="relative">
-            <button 
-              onClick={() => setShowAuthModal(false)}
-              className="absolute right-4 top-4 p-2 hover:bg-gray-100 rounded-full transition-colors z-20"
-            >
-              <X className="h-5 w-5 text-gray-400" />
-            </button>
-
+          <div className="relative min-h-[500px] flex flex-col">
             {authMode === 'login' ? (
               <div className="flex border-b border-gray-100">
                 <button 
