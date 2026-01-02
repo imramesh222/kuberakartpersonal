@@ -19,13 +19,14 @@ export function Header() {
   const [location, setLocation] = useLocation();
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [authMode, setAuthMode] = useState<'login' | 'signup'>('login');
+  const [loginMethod, setLoginMethod] = useState<'password' | 'phone'>('password');
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     if (location === "/login") {
       setAuthMode('login');
       setShowAuthModal(true);
-      // Use a timeout to avoid location update issues during render
       const timer = setTimeout(() => setLocation("/", { replace: true }), 0);
       return () => clearTimeout(timer);
     } else if (location === "/signup") {
@@ -118,35 +119,93 @@ export function Header() {
 
       {/* Auth Modal */}
       <Dialog open={showAuthModal} onOpenChange={setShowAuthModal}>
-        <DialogContent className="max-w-[400px] p-0 overflow-hidden border-none shadow-2xl rounded-2xl bg-white sm:rounded-2xl data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-bottom-[48%] data-[state=open]:slide-in-from-bottom-[48%] sm:data-[state=open]:slide-in-from-bottom-[50%] duration-300">
+        <DialogContent className="max-w-[420px] p-0 overflow-hidden border-none shadow-2xl rounded-2xl bg-white sm:rounded-2xl data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-bottom-[48%] data-[state=open]:slide-in-from-bottom-[48%] sm:data-[state=open]:slide-in-from-bottom-[50%] duration-300">
           <DialogTitle className="sr-only">Authentication</DialogTitle>
           <div className="relative">
-            <div className="pt-8 pb-4">
-              <h2 className="text-xl font-bold text-center text-[#333]">
-                {authMode === 'login' ? 'Login' : 'Sign up'}
-              </h2>
-            </div>
+            <button 
+              onClick={() => setShowAuthModal(false)}
+              className="absolute right-4 top-4 p-2 hover:bg-gray-100 rounded-full transition-colors z-20"
+            >
+              <X className="h-5 w-5 text-gray-400" />
+            </button>
 
-            <div className="space-y-4 px-6 pb-8">
-              <div className="flex gap-2">
-                <div className="w-20 h-12 flex items-center justify-center border-2 border-gray-100 rounded-lg bg-white">
-                  <img 
-                    src="https://flagcdn.com/w40/np.png" 
-                    alt="Nepal Flag" 
-                    className="w-4 h-4 mr-1"
-                  />
-                  <span className="font-semibold text-gray-600 text-sm">+977</span>
-                </div>
-                <div className="flex-1 h-12 border-2 border-gray-100 rounded-lg focus-within:border-primary transition-colors">
-                  <input
-                    type="tel"
-                    placeholder="Phone number"
-                    className="w-full h-full px-3 outline-none text-gray-700 placeholder:text-gray-400 font-medium text-sm"
-                    value={phoneNumber}
-                    onChange={(e) => setPhoneNumber(e.target.value)}
-                  />
-                </div>
+            {authMode === 'login' ? (
+              <div className="flex border-b border-gray-100">
+                <button 
+                  onClick={() => setLoginMethod('password')}
+                  className={`flex-1 py-4 text-sm font-bold transition-colors relative ${loginMethod === 'password' ? 'text-primary' : 'text-gray-400 hover:text-gray-600'}`}
+                >
+                  Password
+                  {loginMethod === 'password' && <div className="absolute bottom-0 left-1/4 right-1/4 h-0.5 bg-primary" />}
+                </button>
+                <div className="w-px h-6 bg-gray-100 self-center" />
+                <button 
+                  onClick={() => setLoginMethod('phone')}
+                  className={`flex-1 py-4 text-sm font-bold transition-colors relative ${loginMethod === 'phone' ? 'text-primary' : 'text-gray-400 hover:text-gray-600'}`}
+                >
+                  Phone Number
+                  {loginMethod === 'phone' && <div className="absolute bottom-0 left-1/4 right-1/4 h-0.5 bg-primary" />}
+                </button>
               </div>
+            ) : (
+              <div className="pt-8 pb-4">
+                <h2 className="text-xl font-bold text-center text-[#333]">Sign up</h2>
+              </div>
+            )}
+
+            <div className="space-y-4 px-8 pb-10 pt-6">
+              {authMode === 'login' && loginMethod === 'password' ? (
+                <>
+                  <div className="h-12 border-2 border-gray-100 rounded-lg focus-within:border-primary transition-colors">
+                    <input
+                      type="text"
+                      placeholder="Please enter your Phone or Email"
+                      className="w-full h-full px-4 outline-none text-gray-700 placeholder:text-gray-400 font-medium text-sm"
+                    />
+                  </div>
+                  <div className="h-12 border-2 border-gray-100 rounded-lg focus-within:border-primary transition-colors relative">
+                    <input
+                      type={showPassword ? "text" : "password"}
+                      placeholder="Please enter your password"
+                      className="w-full h-full px-4 pr-10 outline-none text-gray-700 placeholder:text-gray-400 font-medium text-sm"
+                    />
+                    <button 
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                    >
+                      {showPassword ? (
+                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+                      ) : (
+                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.542-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l18 18" /></svg>
+                      )}
+                    </button>
+                  </div>
+                  <div className="text-right">
+                    <button className="text-xs text-gray-400 hover:text-primary transition-colors">Forgot password?</button>
+                  </div>
+                </>
+              ) : (
+                <div className="flex gap-2">
+                  <div className="w-20 h-12 flex items-center justify-center border-2 border-gray-100 rounded-lg bg-white">
+                    <img 
+                      src="https://flagcdn.com/w40/np.png" 
+                      alt="Nepal Flag" 
+                      className="w-4 h-4 mr-1"
+                    />
+                    <span className="font-semibold text-gray-600 text-sm">+977</span>
+                  </div>
+                  <div className="flex-1 h-12 border-2 border-gray-100 rounded-lg focus-within:border-primary transition-colors">
+                    <input
+                      type="tel"
+                      placeholder="Phone number"
+                      className="w-full h-full px-3 outline-none text-gray-700 placeholder:text-gray-400 font-medium text-sm"
+                      value={phoneNumber}
+                      onChange={(e) => setPhoneNumber(e.target.value)}
+                    />
+                  </div>
+                </div>
+              )}
 
               {authMode === 'signup' && (
                 <div className="flex items-start space-x-2">
@@ -160,23 +219,31 @@ export function Header() {
               )}
 
               <div className="space-y-3 pt-2">
-                <Button className="w-full h-11 bg-[#E88043] hover:bg-[#D66D32] text-white text-sm font-bold rounded-lg flex items-center justify-center gap-2">
-                  <div className="bg-white p-0.5 rounded-full">
-                    <MessageCircle className="h-4 w-4 text-[#25D366] fill-[#25D366]" />
-                  </div>
-                  Send code via Whatsapp
+                <Button className="w-full h-12 bg-[#E88043] hover:bg-[#D66D32] text-white text-sm font-bold rounded-lg flex items-center justify-center gap-2">
+                  {authMode === 'login' ? (
+                    'LOGIN'
+                  ) : (
+                    <>
+                      <div className="bg-white p-0.5 rounded-full">
+                        <MessageCircle className="h-4 w-4 text-[#25D366] fill-[#25D366]" />
+                      </div>
+                      Send code via Whatsapp
+                    </>
+                  )}
                 </Button>
 
-                <Button variant="outline" className="w-full h-11 border-[#E88043] text-[#E88043] hover:bg-[#E88043]/5 text-sm font-bold rounded-lg flex items-center justify-center gap-2">
-                  <Smartphone className="h-5 w-5" />
-                  Send code via SMS
-                </Button>
+                {authMode === 'signup' && (
+                  <Button variant="outline" className="w-full h-12 border-[#E88043] text-[#E88043] hover:bg-[#E88043]/5 text-sm font-bold rounded-lg flex items-center justify-center gap-2">
+                    <Smartphone className="h-5 w-5" />
+                    Send code via SMS
+                  </Button>
+                )}
               </div>
 
               <div className="text-center pt-1">
                 <p className="text-xs text-gray-500 font-medium">
                   {authMode === 'login' ? (
-                    <>Don't have an account? <button onClick={() => setAuthMode('signup')} className="text-[#3A7BD5] hover:underline font-semibold">Sign up Now</button></>
+                    <>Don't have an account? <button onClick={() => setAuthMode('signup')} className="text-[#3A7BD5] hover:underline font-semibold">Sign up</button></>
                   ) : (
                     <>Already have an account? <button onClick={() => setAuthMode('login')} className="text-[#3A7BD5] hover:underline font-semibold">Log in Now</button></>
                   )}
