@@ -1,8 +1,10 @@
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
-import { Search, ShoppingCart, User, Menu, ChevronDown, Heart } from "lucide-react";
+import { Search, ShoppingCart, User, Menu, ChevronDown, Heart, X, MessageCircle, Smartphone } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Checkbox } from "@/components/ui/checkbox";
 import { 
   DropdownMenu, 
   DropdownMenuContent, 
@@ -10,14 +12,29 @@ import {
   DropdownMenuTrigger 
 } from "@/components/ui/dropdown-menu";
 import { CATEGORIES } from "@/lib/mockData";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 
 export function Header() {
   const { itemCount } = useCart();
   const [location, setLocation] = useLocation();
+  const [showAuthModal, setShowAuthModal] = useState(false);
+  const [authMode, setAuthMode] = useState<'login' | 'signup'>('login');
+  const [phoneNumber, setPhoneNumber] = useState("");
+
+  useEffect(() => {
+    if (location === "/login") {
+      setAuthMode('login');
+      setShowAuthModal(true);
+      setLocation("/", { replace: true });
+    } else if (location === "/signup") {
+      setAuthMode('signup');
+      setShowAuthModal(true);
+      setLocation("/", { replace: true });
+    }
+  }, [location, setLocation]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    // In a real app, this would filter or redirect
   };
 
   return (
@@ -43,14 +60,20 @@ export function Header() {
 
           {/* Right Actions */}
           <div className="flex items-center gap-4 text-xs md:text-sm font-medium">
-            <Link href="/login" className="flex items-center gap-1 hover:text-white/80 transition-colors">
+            <button 
+              onClick={() => { setAuthMode('login'); setShowAuthModal(true); }}
+              className="flex items-center gap-1 hover:text-white/80 transition-colors"
+            >
               <User className="h-5 w-5 md:hidden" />
               <span className="hidden md:inline">Login</span>
-            </Link>
+            </button>
             <span className="hidden md:inline">|</span>
-            <Link href="/signup" className="hidden md:inline hover:text-white/80 transition-colors">
+            <button 
+              onClick={() => { setAuthMode('signup'); setShowAuthModal(true); }}
+              className="hidden md:inline hover:text-white/80 transition-colors"
+            >
               Sign Up
-            </Link>
+            </button>
             
             <Link href="/cart" className="relative group">
               <ShoppingCart className="h-6 w-6" />
@@ -61,19 +84,6 @@ export function Header() {
               )}
             </Link>
           </div>
-        </div>
-        
-        {/* Mobile Search - Visible only on mobile */}
-        <div className="mt-3 md:hidden">
-          <form onSubmit={handleSearch} className="flex relative">
-            <Input 
-              placeholder="Search in KuberaKart" 
-              className="bg-white text-black border-none h-9 text-sm"
-            />
-            <Button type="submit" size="sm" className="absolute right-0 top-0 h-9 bg-transparent hover:bg-transparent text-gray-500">
-              <Search className="h-4 w-4" />
-            </Button>
-          </form>
         </div>
       </header>
 
@@ -102,6 +112,103 @@ export function Header() {
           </div>
         </div>
       </nav>
+
+      {/* Auth Modal */}
+      <Dialog open={showAuthModal} onOpenChange={setShowAuthModal}>
+        <DialogContent className="max-w-[450px] p-0 overflow-hidden border-none shadow-2xl rounded-2xl bg-white">
+          <div className="relative">
+            <button 
+              onClick={() => setShowAuthModal(false)}
+              className="absolute right-4 top-4 p-2 hover:bg-gray-100 rounded-full transition-colors z-10"
+            >
+              <X className="h-6 w-6 text-gray-400" />
+            </button>
+
+            <div className="pt-12 pb-6">
+              <h2 className="text-2xl font-bold text-center text-[#333]">
+                {authMode === 'login' ? 'Login' : 'Sign up'}
+              </h2>
+            </div>
+
+            <div className="space-y-6 px-8 pb-10">
+              <div className="flex gap-2">
+                <div className="w-24 h-14 flex items-center justify-center border-2 border-gray-200 rounded-lg bg-white">
+                  <img 
+                    src="https://flagcdn.com/w40/np.png" 
+                    alt="Nepal Flag" 
+                    className="w-5 h-5 mr-1"
+                  />
+                  <span className="font-semibold text-gray-700">+977</span>
+                </div>
+                <div className="flex-1 h-14 border-2 border-gray-200 rounded-lg focus-within:border-primary transition-colors">
+                  <input
+                    type="tel"
+                    placeholder="Please enter your phone number"
+                    className="w-full h-full px-4 outline-none text-gray-700 placeholder:text-gray-400 font-medium"
+                    value={phoneNumber}
+                    onChange={(e) => setPhoneNumber(e.target.value)}
+                  />
+                </div>
+              </div>
+
+              {authMode === 'signup' && (
+                <div className="flex items-start space-x-3">
+                  <Checkbox id="terms" className="mt-1 border-gray-300 data-[state=checked]:bg-primary data-[state=checked]:border-primary" />
+                  <label htmlFor="terms" className="text-sm leading-tight text-gray-500 font-medium">
+                    By creating and/or using your account, you agree to our{" "}
+                    <span className="text-primary hover:underline cursor-pointer">Terms of Use</span> and{" "}
+                    <span className="text-primary hover:underline cursor-pointer">Privacy Policy</span>.
+                  </label>
+                </div>
+              )}
+
+              <div className="space-y-4 pt-4">
+                <Button className="w-full h-14 bg-[#E88043] hover:bg-[#D66D32] text-white text-lg font-bold rounded-xl flex items-center justify-center gap-3">
+                  <div className="bg-white p-1 rounded-full">
+                    <MessageCircle className="h-5 w-5 text-[#25D366] fill-[#25D366]" />
+                  </div>
+                  Send code via Whatsapp
+                </Button>
+
+                <Button variant="outline" className="w-full h-14 border-[#E88043] text-[#E88043] hover:bg-[#E88043]/5 text-lg font-bold rounded-xl flex items-center justify-center gap-3">
+                  <Smartphone className="h-6 w-6" />
+                  Send code via SMS
+                </Button>
+              </div>
+
+              <div className="text-center pt-2">
+                <p className="text-gray-500 font-medium">
+                  {authMode === 'login' ? (
+                    <>Don't have an account? <button onClick={() => setAuthMode('signup')} className="text-[#3A7BD5] hover:underline font-semibold">Sign up Now</button></>
+                  ) : (
+                    <>Already have an account? <button onClick={() => setAuthMode('login')} className="text-[#3A7BD5] hover:underline font-semibold">Log in Now</button></>
+                  )}
+                </p>
+              </div>
+
+              <div className="relative py-4">
+                <div className="absolute inset-0 flex items-center">
+                  <span className="w-full border-t border-gray-100" />
+                </div>
+                <div className="relative flex justify-center text-sm uppercase">
+                  <span className="bg-white px-4 text-gray-400 font-semibold">Or, {authMode === 'login' ? 'login' : 'sign up'} with</span>
+                </div>
+              </div>
+
+              <div className="flex justify-center gap-8 pb-4">
+                <button className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+                  <img src="https://www.gstatic.com/images/branding/product/1x/gsa_512dp.png" alt="Google" className="w-6 h-6" />
+                  <span className="text-gray-600 font-medium">Google</span>
+                </button>
+                <button className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Facebook_Logo_2023.png" alt="Facebook" className="w-6 h-6" />
+                  <span className="text-gray-600 font-medium">Facebook</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
