@@ -9,6 +9,8 @@ import { HomePage } from "@/pages/home";
 import { CategoryPage } from "@/pages/category";
 import { ProductPage } from "@/pages/product";
 import { CartPage } from "@/pages/cart";
+import LoginPage from "@/pages/login";
+import ResetPasswordPage from "@/pages/reset-password";
 
 function Router() {
   return (
@@ -17,6 +19,8 @@ function Router() {
       <Route path="/category/:id" component={CategoryPage} />
       <Route path="/product/:id" component={ProductPage} />
       <Route path="/cart" component={CartPage} />
+      <Route path="/login" component={LoginPage} />
+      <Route path="/reset-password" component={ResetPasswordPage} />
       <Route component={NotFound} />
     </Switch>
   );
