@@ -12,7 +12,7 @@ import {
   DropdownMenuTrigger 
 } from "@/components/ui/dropdown-menu";
 import { CATEGORIES } from "@/lib/mockData";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 
 export function Header() {
   const { itemCount } = useCart();
@@ -25,11 +25,14 @@ export function Header() {
     if (location === "/login") {
       setAuthMode('login');
       setShowAuthModal(true);
-      setLocation("/", { replace: true });
+      // Use a timeout to avoid location update issues during render
+      const timer = setTimeout(() => setLocation("/", { replace: true }), 0);
+      return () => clearTimeout(timer);
     } else if (location === "/signup") {
       setAuthMode('signup');
       setShowAuthModal(true);
-      setLocation("/", { replace: true });
+      const timer = setTimeout(() => setLocation("/", { replace: true }), 0);
+      return () => clearTimeout(timer);
     }
   }, [location, setLocation]);
 
@@ -116,6 +119,7 @@ export function Header() {
       {/* Auth Modal */}
       <Dialog open={showAuthModal} onOpenChange={setShowAuthModal}>
         <DialogContent className="max-w-[450px] p-0 overflow-hidden border-none shadow-2xl rounded-2xl bg-white">
+          <DialogTitle className="sr-only">Authentication</DialogTitle>
           <div className="relative">
             <button 
               onClick={() => setShowAuthModal(false)}

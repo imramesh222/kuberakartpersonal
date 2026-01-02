@@ -20,8 +20,9 @@ function Router() {
       <Route path="/category/:id" component={CategoryPage} />
       <Route path="/product/:id" component={ProductPage} />
       <Route path="/cart" component={CartPage} />
-      <Route path="/login" component={LoginPage} />
-      <Route path="/signup" component={SignupPage} />
+      {/* Auth routes handled by Header modal */}
+      <Route path="/login" component={HomePage} />
+      <Route path="/signup" component={HomePage} />
       <Route path="/reset-password" component={ResetPasswordPage} />
       <Route component={NotFound} />
     </Switch>
