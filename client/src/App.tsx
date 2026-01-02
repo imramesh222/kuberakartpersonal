@@ -10,6 +10,7 @@ import { CategoryPage } from "@/pages/category";
 import { ProductPage } from "@/pages/product";
 import { CartPage } from "@/pages/cart";
 import LoginPage from "@/pages/login";
+import SignupPage from "@/pages/signup";
 import ResetPasswordPage from "@/pages/reset-password";
 
 function Router() {
@@ -20,6 +21,7 @@ function Router() {
       <Route path="/product/:id" component={ProductPage} />
       <Route path="/cart" component={CartPage} />
       <Route path="/login" component={LoginPage} />
+      <Route path="/signup" component={SignupPage} />
       <Route path="/reset-password" component={ResetPasswordPage} />
       <Route component={NotFound} />
     </Switch>
