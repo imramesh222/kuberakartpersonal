@@ -118,30 +118,30 @@ export function Header() {
 
       {/* Auth Modal */}
       <Dialog open={showAuthModal} onOpenChange={setShowAuthModal}>
-        <DialogContent className="max-w-[450px] p-0 overflow-hidden border-none shadow-2xl rounded-2xl bg-white sm:rounded-2xl data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-bottom-[48%] data-[state=open]:slide-in-from-bottom-[48%] sm:data-[state=open]:slide-in-from-bottom-[50%] duration-300">
+        <DialogContent className="max-w-[400px] p-0 overflow-hidden border-none shadow-2xl rounded-2xl bg-white sm:rounded-2xl data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-bottom-[48%] data-[state=open]:slide-in-from-bottom-[48%] sm:data-[state=open]:slide-in-from-bottom-[50%] duration-300">
           <DialogTitle className="sr-only">Authentication</DialogTitle>
           <div className="relative">
-            <div className="pt-12 pb-6">
-              <h2 className="text-2xl font-bold text-center text-[#333]">
+            <div className="pt-8 pb-4">
+              <h2 className="text-xl font-bold text-center text-[#333]">
                 {authMode === 'login' ? 'Login' : 'Sign up'}
               </h2>
             </div>
 
-            <div className="space-y-6 px-8 pb-10">
+            <div className="space-y-4 px-6 pb-8">
               <div className="flex gap-2">
-                <div className="w-24 h-14 flex items-center justify-center border-2 border-gray-200 rounded-lg bg-white">
+                <div className="w-20 h-12 flex items-center justify-center border-2 border-gray-100 rounded-lg bg-white">
                   <img 
                     src="https://flagcdn.com/w40/np.png" 
                     alt="Nepal Flag" 
-                    className="w-5 h-5 mr-1"
+                    className="w-4 h-4 mr-1"
                   />
-                  <span className="font-semibold text-gray-700">+977</span>
+                  <span className="font-semibold text-gray-600 text-sm">+977</span>
                 </div>
-                <div className="flex-1 h-14 border-2 border-gray-200 rounded-lg focus-within:border-primary transition-colors">
+                <div className="flex-1 h-12 border-2 border-gray-100 rounded-lg focus-within:border-primary transition-colors">
                   <input
                     type="tel"
-                    placeholder="Please enter your phone number"
-                    className="w-full h-full px-4 outline-none text-gray-700 placeholder:text-gray-400 font-medium"
+                    placeholder="Phone number"
+                    className="w-full h-full px-3 outline-none text-gray-700 placeholder:text-gray-400 font-medium text-sm"
                     value={phoneNumber}
                     onChange={(e) => setPhoneNumber(e.target.value)}
                   />
@@ -149,32 +149,32 @@ export function Header() {
               </div>
 
               {authMode === 'signup' && (
-                <div className="flex items-start space-x-3">
-                  <Checkbox id="terms" className="mt-1 border-gray-300 data-[state=checked]:bg-primary data-[state=checked]:border-primary" />
-                  <label htmlFor="terms" className="text-sm leading-tight text-gray-500 font-medium">
-                    By creating and/or using your account, you agree to our{" "}
-                    <span className="text-primary hover:underline cursor-pointer">Terms of Use</span> and{" "}
-                    <span className="text-primary hover:underline cursor-pointer">Privacy Policy</span>.
+                <div className="flex items-start space-x-2">
+                  <Checkbox id="terms" className="mt-1 h-3.5 w-3.5 border-gray-300 data-[state=checked]:bg-primary data-[state=checked]:border-primary" />
+                  <label htmlFor="terms" className="text-[11px] leading-tight text-gray-400 font-medium">
+                    By creating an account, you agree to our{" "}
+                    <span className="text-primary hover:underline cursor-pointer">Terms</span> and{" "}
+                    <span className="text-primary hover:underline cursor-pointer">Privacy</span>.
                   </label>
                 </div>
               )}
 
-              <div className="space-y-4 pt-4">
-                <Button className="w-full h-14 bg-[#E88043] hover:bg-[#D66D32] text-white text-lg font-bold rounded-xl flex items-center justify-center gap-3">
-                  <div className="bg-white p-1 rounded-full">
-                    <MessageCircle className="h-5 w-5 text-[#25D366] fill-[#25D366]" />
+              <div className="space-y-3 pt-2">
+                <Button className="w-full h-11 bg-[#E88043] hover:bg-[#D66D32] text-white text-sm font-bold rounded-lg flex items-center justify-center gap-2">
+                  <div className="bg-white p-0.5 rounded-full">
+                    <MessageCircle className="h-4 w-4 text-[#25D366] fill-[#25D366]" />
                   </div>
                   Send code via Whatsapp
                 </Button>
 
-                <Button variant="outline" className="w-full h-14 border-[#E88043] text-[#E88043] hover:bg-[#E88043]/5 text-lg font-bold rounded-xl flex items-center justify-center gap-3">
-                  <Smartphone className="h-6 w-6" />
+                <Button variant="outline" className="w-full h-11 border-[#E88043] text-[#E88043] hover:bg-[#E88043]/5 text-sm font-bold rounded-lg flex items-center justify-center gap-2">
+                  <Smartphone className="h-5 w-5" />
                   Send code via SMS
                 </Button>
               </div>
 
-              <div className="text-center pt-2">
-                <p className="text-gray-500 font-medium">
+              <div className="text-center pt-1">
+                <p className="text-xs text-gray-500 font-medium">
                   {authMode === 'login' ? (
                     <>Don't have an account? <button onClick={() => setAuthMode('signup')} className="text-[#3A7BD5] hover:underline font-semibold">Sign up Now</button></>
                   ) : (
@@ -183,23 +183,25 @@ export function Header() {
                 </p>
               </div>
 
-              <div className="relative py-4">
+              <div className="relative py-2">
                 <div className="absolute inset-0 flex items-center">
                   <span className="w-full border-t border-gray-100" />
                 </div>
-                <div className="relative flex justify-center text-sm uppercase">
-                  <span className="bg-white px-4 text-gray-400 font-semibold">Or, {authMode === 'login' ? 'login' : 'sign up'} with</span>
+                <div className="relative flex justify-center text-[10px] uppercase">
+                  <span className="bg-white px-3 text-gray-400 font-bold">Or, {authMode === 'login' ? 'login' : 'sign up'} with</span>
                 </div>
               </div>
 
-              <div className="flex justify-center gap-8 pb-4">
+              <div className="flex justify-center gap-6 pb-2">
                 <button className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-                  <img src="https://www.gstatic.com/images/branding/product/1x/gsa_512dp.png" alt="Google" className="w-6 h-6" />
-                  <span className="text-gray-600 font-medium">Google</span>
+                  <img src="https://www.gstatic.com/images/branding/product/1x/gsa_512dp.png" alt="Google" className="w-5 h-5" />
+                  <span className="text-gray-500 text-xs font-semibold">Google</span>
                 </button>
                 <button className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Facebook_Logo_2023.png" alt="Facebook" className="w-6 h-6" />
-                  <span className="text-gray-600 font-medium">Facebook</span>
+                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="#1877F2">
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                  </svg>
+                  <span className="text-gray-500 text-xs font-semibold">Facebook</span>
                 </button>
               </div>
             </div>
